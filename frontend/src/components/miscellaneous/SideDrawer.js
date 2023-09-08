@@ -29,7 +29,7 @@ import ProfileModal from "./ProfileModal";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { getSender } from "../../config/chatLogics";
-import UserListItem from "../UserAvatar/UserListitem";
+import UserListItem from "../UserAvatar/UserListItem";
 import { ChatState } from "../../Context/ChatProvider";
 
 function SideDrawer() {
