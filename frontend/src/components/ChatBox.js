@@ -22,4 +22,4 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
   );
 };
 
-export default ChatBox;
+export default Chatbox;
