@@ -1,34 +1,54 @@
-const dotenv = require('dotenv');
-const express = require('express');
-const{chats}= require("./data/data");
-const connectDB = require('./config/db');
+const express = require("express");
+const connectDB = require("./config/db");
+const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
-const {notFound, errorHandler } = require('./middleware/errorMiddleware');
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const path = require("path");
 
-const app = express();
 dotenv.config();
 connectDB();
+const app = express();
 
 app.use(express.json()); // to accept json data
 
-app.get('/', (req,res)=>{
-    res.send("API is running");
+// app.get("/", (req, res) => {
+//   res.send("API Running!");
+// });
 
-});
-
-app.use('/api/user', userRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
 
+// --------------------------deployment------------------------------
+
+//const __dirname1 = path.resolve();
+
+//if (process.env.NODE_ENV === "production") {
+  //app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  //app.get("*", (req, res) =>
+    //res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  //);
+//} else {
+  //app.get("/", (req, res) => {
+    //res.send("API is running..");
+  //});
+//}
+
+// --------------------------deployment------------------------------
+
+// Error Handling middlewares
 app.use(notFound);
 app.use(errorHandler);
 
+const PORT = process.env.PORT;
 
-const PORT = process.env.PORT || 5000
-
-const server = app.listen(5000, console.log(`Server started on port 5000 ${PORT}`));
+const server = app.listen(
+  PORT,
+  console.log(`Server running on PORT ${PORT}`)//.yellow.bold)
+);
 
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
@@ -69,9 +89,3 @@ io.on("connection", (socket) => {
     socket.leave(userData._id);
   });
 });
-
-
- 
-
-
-

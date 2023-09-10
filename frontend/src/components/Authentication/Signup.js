@@ -56,7 +56,7 @@ const Signup = () => {
           duration: 5000,
           isClosable: true,
           position: "bottom",
-        });
+     });
 
       }
 
@@ -95,7 +95,7 @@ const Signup = () => {
           },
         };
 
-        const {data} = await axios.post("/api/user",{name, email,password,pic},
+        const {data} = await axios.post("/api/user",{name, email,password},
          config
          );
            toast({
@@ -183,17 +183,8 @@ const Signup = () => {
 
 
             </InputGroup>
-         </FormControl>   
-          <FormControl id='pic' >
-            <FormLabel>Upload your picture</FormLabel>
-            <Input 
-             type='file'
-             p={1.5}
-             accept='image/*'
-             onChange={(e)=> postDetails(e.target.files[0])}
-            
-            />
-  </FormControl> 
+        </FormControl>   
+       
 
         <Button
             colorScheme = "blue"
@@ -211,4 +202,4 @@ const Signup = () => {
   )
 };
 
-export default Signup
+export default Signup;
